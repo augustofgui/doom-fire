@@ -12,18 +12,23 @@ body {
 
 body {
   background-color: rgb(7, 7, 7);
+}
+
+body div {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: end;
 }
 
-canvas {
+body div canvas {
   width: 100%;
-  height: 250px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   image-rendering: -moz-crisp-edges;
+  margin-top: auto;
 }
 
 
