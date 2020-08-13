@@ -11,15 +11,16 @@ body {
 }
 
 body {
+  background-color: rgb(7, 7, 7);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 }
 
 canvas {
-  border: 1px black solid;
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 250px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   image-rendering: -moz-crisp-edges;
