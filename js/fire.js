@@ -1,4 +1,3 @@
-const firePixelArray = [];
 const fireColorsPalette = [{ "r": 7, "g": 7, "b": 7 }, { "r": 31, "g": 7, "b": 7 }, { "r": 47, "g": 15, "b": 7 }, { "r": 71, "g": 15, "b": 7 }, { "r": 87, "g": 23, "b": 7 }, { "r": 103, "g": 31, "b": 7 }, { "r": 119, "g": 31, "b": 7 }, { "r": 143, "g": 39, "b": 7 }, { "r": 159, "g": 47, "b": 7 }, { "r": 175, "g": 63, "b": 7 }, { "r": 191, "g": 71, "b": 7 }, { "r": 199, "g": 71, "b": 7 }, { "r": 223, "g": 79, "b": 7 }, { "r": 223, "g": 87, "b": 7 }, { "r": 223, "g": 87, "b": 7 }, { "r": 215, "g": 95, "b": 7 }, { "r": 215, "g": 95, "b": 7 }, { "r": 215, "g": 103, "b": 15 }, { "r": 207, "g": 111, "b": 15 }, { "r": 207, "g": 119, "b": 15 }, { "r": 207, "g": 127, "b": 15 }, { "r": 207, "g": 135, "b": 23 }, { "r": 199, "g": 135, "b": 23 }, { "r": 199, "g": 143, "b": 23 }, { "r": 199, "g": 151, "b": 31 }, { "r": 191, "g": 159, "b": 31 }, { "r": 191, "g": 159, "b": 31 }, { "r": 191, "g": 167, "b": 39 }, { "r": 191, "g": 167, "b": 39 }, { "r": 191, "g": 175, "b": 47 }, { "r": 183, "g": 175, "b": 47 }, { "r": 183, "g": 183, "b": 47 }, { "r": 183, "g": 183, "b": 55 }, { "r": 207, "g": 207, "b": 111 }, { "r": 223, "g": 223, "b": 159 }, { "r": 239, "g": 239, "b": 199 }, { "r": 255, "g": 255, "b": 255 }];
 const boxLimits = [{}];
 
@@ -6,17 +5,12 @@ const canvasFooter = document.getElementById('doom-fire-footer');
 const contextFooter = canvasFooter.getContext('2d');
 
 const rectWindow = canvasFooter.parentNode.getBoundingClientRect();
-const fireWidth = canvasFooter.width = Math.floor(rectWindow.width / 4);
-const fireHeight = canvasFooter.height = Math.floor(rectWindow.height / 4);
-
-/*contextTextBase.font = "40px VT323";
-contextTextBase.fillStyle = "red";
-contextTextBase.textAlign = "center";
-contextTextBase.fillText("Hello World", Math.floor(textBaseCanvas.width / 2), Math.floor(textBaseCanvas.height / 2));
-
-const textData = contextTextBase.getImageData(0, 0, textBaseCanvas.width, textBaseCanvas.height);*/
+const fireWidth = canvasFooter.width = Math.floor(rectWindow.width / 5);
+const fireHeight = canvasFooter.height = Math.floor(rectWindow.height / 5);
 
 function start() {
+  const arraz = [1,9,6,3,7,8,24,5,8,5,1,3,4,5,453242,43,4536];
+
   calculateBoxPosition(fireWidth, 40, 0, fireHeight - 40);
   createFireSource(boxLimits[0]);
   renderFire(boxLimits[0]);
@@ -73,7 +67,7 @@ function updateFireIntensityPerPixel(currentPixelIndex, boxObject) {
 
     boxObject.fireIntensityArray[currentPixelIndex - decay] = newFireIntensity;
 
-    
+
     return
   }
 }
@@ -83,7 +77,7 @@ function renderFire(boxObject) {
   const diffHeight = (fireHeight - boxObject.height);
   for (let row = 0; row < boxObject.height; row++) {
     for (let column = 0; column < boxObject.width; column++) {
-      
+
       const realIndex = column + (row * boxObject.width);
       const fireIntensity = boxObject.fireIntensityArray[realIndex];
       const color = fireColorsPalette[fireIntensity];
@@ -93,11 +87,7 @@ function renderFire(boxObject) {
       contextFooter.fillRect(diffWidth + column, diffHeight + row, 1, 1);
     }
   }
-  requestAnimationFrame(function() {
-    renderFire(boxObject);
-  });
+  requestAnimationFrame(() => renderFire(boxObject));
 }
-
-
 
 start();
