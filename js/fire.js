@@ -4,13 +4,23 @@ const boxLimits = [{}];
 const canvasFooter = document.getElementById('doom-fire-footer');
 const contextFooter = canvasFooter.getContext('2d');
 
+const canvasBaseText = document.createElement('canvas');
+const contextBaseText = canvasBaseText.getContext('2d');
+
 const rectWindow = canvasFooter.parentNode.getBoundingClientRect();
 const fireWidth = canvasFooter.width = Math.floor(rectWindow.width / 5);
 const fireHeight = canvasFooter.height = Math.floor(rectWindow.height / 5);
 
-function start() {
-  const arraz = [1,9,6,3,7,8,24,5,8,5,1,3,4,5,453242,43,4536];
+contextBaseText.font = "30px VT323";
+contextBaseText.fillStyle = "red";
+contextBaseText.textAlign = "center";
+contextBaseText.fillText("Hello World", 0, 0);
 
+const imageData = contextBaseText.getImageData(0, 0, canvasBaseText.width, canvasBaseText.height);
+
+contextFooter.drawImage(canvasBaseText, 0 , 0);
+
+function start() {
   calculateBoxPosition(fireWidth, 40, 0, fireHeight - 40);
   createFireSource(boxLimits[0]);
   renderFire(boxLimits[0]);
